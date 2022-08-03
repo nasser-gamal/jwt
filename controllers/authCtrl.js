@@ -121,18 +121,6 @@ const authCtrl = {
       res.status(500).json({ msg: error.message });
     }
   },
-
-  getUser: async (req, res) => {
-    try {
-      await Users.findById(req.params.id).then((result) =>
-      res.json({ msg: result })
-    );
-    } catch (erro) {
-      return res.json({
-        msg: erro
-      })
-   }
-  },
 };
 
 module.exports = authCtrl;
