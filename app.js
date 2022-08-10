@@ -5,23 +5,29 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieparser = require("cookie-parser");
 const authRouter = require("./routers/auth");
+const postRouter = require("./routers/post");
+const profileRouter = require("./routers/profile");
 const app = express();
 const port = 3000;
 
-
 app.use(cors());
 app.use(express.json());
-app.use(cookieparser())
+app.use(cookieparser());
 
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-
+// app.post('/image', upload.single('imgURL'), (req, res) => {
+//   console.log(req.file)
+// })
 
 app.use("/", authRouter);
+app.use("/", postRouter);
+app.use("/", profileRouter);
 
 mongoose
   .connect(
